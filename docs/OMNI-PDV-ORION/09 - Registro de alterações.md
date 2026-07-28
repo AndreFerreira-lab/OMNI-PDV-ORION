@@ -8,6 +8,12 @@ ultima_revisao: 2026-07-28
 
 # Registro de alterações
 
+## 2026-07-28 — Publicação em produção
+
+- Versão de Administração, Recuperação de senha, Registros fase 1 e Caixa Rápido aprovada para produção.
+- Artefato de Preview validado no commit `444a867`, com build de 692 módulos e estado `READY`.
+- Banco sem nova migração nesta publicação; estruturas da fase de Registros já estavam aplicadas.
+
 ## 2026-07-28 — Caixa Rápido versão enxuta
 
 - Criada a rota protegida `/caixa` e o item **Caixa Rápido** na sidebar.

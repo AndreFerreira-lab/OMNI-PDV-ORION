@@ -22,7 +22,7 @@ ultima_revisao: 2026-07-28
 - Branch: `codex/admin-permissions`
 - URL estável da branch: `https://omni-pdv-orion-git-codex-admin-permissions-aura-smoke.vercel.app`
 - Estado em 2026-07-28: `READY`
-- Produção não promovida.
+- Versão aprovada para produção em 2026-07-28.
 - Build da Vercel concluído sem erros; logs de runtime sem erros, avisos ou falhas no período consultado.
 
 ## Configuração Vercel
