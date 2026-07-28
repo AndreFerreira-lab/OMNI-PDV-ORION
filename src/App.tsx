@@ -13,6 +13,7 @@ import AnaliseCredito from './pages/AnaliseCredito';
 import Administracao from './pages/Administracao';
 import RedefinirSenha from './pages/RedefinirSenha';
 import Registros from './pages/Registros';
+import CaixaRapido from './pages/CaixaRapido';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/catalogo" element={<PermissionRoute permission="catalogo.visualizar"><Catalogo /></PermissionRoute>} />
             <Route path="/clientes" element={<PermissionRoute permission="clientes.visualizar"><Clientes /></PermissionRoute>} />
             <Route path="/vendas" element={<PermissionRoute permission="vendas.visualizar"><Vendas /></PermissionRoute>} />
+            <Route path="/caixa" element={<PermissionRoute permission="vendas.criar"><CaixaRapido /></PermissionRoute>} />
             <Route path="/analise-pedidos" element={<PermissionRoute permission="analise_pedidos.visualizar"><AnalisePedidos /></PermissionRoute>} />
             <Route path="/consultas" element={<PermissionRoute permission="consultas.visualizar"><Consultas /></PermissionRoute>} />
             <Route path="/registros" element={<PermissionRoute permission="registros.visualizar"><Registros /></PermissionRoute>} />

@@ -23,6 +23,7 @@ ultima_revisao: 2026-07-28
 | `/catalogo` | Catálogo | Funcional | produtos, categorias e clientes |
 | `/clientes` | Clientes | Funcional | clientes |
 | `/vendas` | Vendas | Funcional | vendas, itens, produtos e clientes |
+| `/caixa` | Caixa Rápido | Funcional | vendas, itens, produtos, clientes e formas de pagamento |
 | `/analise-pedidos` | Análise de pedidos | Em construção | Nenhum |
 | `/consultas` | Consultas | Em construção | Nenhum |
 | `/registros` | Registros | Funcional | empresas, filiais, fornecedores, formas e tabelas de preço |
@@ -94,6 +95,17 @@ Exceto `/` e `/redefinir-senha`, todas as rotas estão protegidas por sessão.
 - Na edição, devolve estoque antigo, troca os itens e baixa o estoque novo.
 - Visualização reutiliza o mesmo formulário em modo somente leitura.
 - Exclusão remove a venda e seus itens em cascata.
+
+## Caixa Rápido
+
+- A primeira versão reutiliza o cadastro de produtos, clientes, formas de pagamento e o fluxo atual de criação de vendas.
+- O acesso exige a permissão `vendas.criar`.
+- Permite buscar produtos, controlar quantidade e desconto, selecionar cliente opcional e forma de pagamento.
+- A quantidade não pode ultrapassar o estoque exibido e produtos sem estoque não podem ser adicionados.
+- A venda é finalizada com status `finalizada` e baixa o estoque pelo mesmo serviço usado em Vendas.
+- O preço unitário salvo nos itens já considera o desconto informado, mantendo a soma dos itens coerente com o total da venda.
+- Não cria tabelas, relações nem políticas RLS.
+- A arquitetura completa planejada está em [[10 - Caixa rápido - visão futura]].
 
 ## Análise de crédito
 

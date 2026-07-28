@@ -22,6 +22,7 @@ Esta é a fonte de verdade funcional e técnica do sistema. Antes de alterar có
 - [[07 - Checklist obrigatório de alteração]]
 - [[08 - Limitações e débitos técnicos]]
 - [[09 - Registro de alterações]]
+- [[10 - Caixa rápido - visão futura]]
 
 ## Estado atual
 

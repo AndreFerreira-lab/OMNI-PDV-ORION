@@ -8,6 +8,18 @@ ultima_revisao: 2026-07-28
 
 # Registro de alterações
 
+## 2026-07-28 — Caixa Rápido versão enxuta
+
+- Criada a rota protegida `/caixa` e o item **Caixa Rápido** na sidebar.
+- Acesso condicionado à permissão existente `vendas.criar`.
+- Implementadas busca de produtos, controle de quantidade e estoque, desconto por item, cliente opcional e forma de pagamento.
+- A finalização reutiliza `criarVenda`, registra status `finalizada` e executa a baixa de estoque existente.
+- Nenhuma tabela, relação, política RLS, migração ou dependência foi adicionada.
+- A versão completa futura foi documentada em [[10 - Caixa rápido - visão futura]], sem implementação.
+- Validação executada: build de produção concluído com 692 módulos.
+- Nenhuma venda de teste foi registrada no banco.
+- Produção e Preview não foram alterados nesta etapa.
+
 ## 2026-07-28 — Registros fase 1
 
 - Criada a central de cadastros para Empresas, Filiais, Fornecedores, Formas de pagamento e Tabelas de preço.
