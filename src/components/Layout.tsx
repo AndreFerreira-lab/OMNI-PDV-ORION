@@ -7,6 +7,7 @@ const navItems = [
   {
     to: '/home',
     label: 'Página Inicial',
+    permission: 'home.visualizar',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
@@ -16,6 +17,7 @@ const navItems = [
   {
     to: '/dashboard',
     label: 'Dashboard',
+    permission: 'dashboard.visualizar',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
@@ -26,6 +28,7 @@ const navItems = [
   {
     to: '/analise-credito',
     label: 'Análise de Crédito',
+    permission: 'analise_credito.visualizar',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
@@ -35,6 +38,7 @@ const navItems = [
   {
     to: '/negocios',
     label: 'Negócios',
+    permission: 'negocios.visualizar',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
@@ -44,6 +48,7 @@ const navItems = [
   {
     to: '/atividades',
     label: 'Atividades',
+    permission: 'atividades.visualizar',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
@@ -51,29 +56,9 @@ const navItems = [
     ),
   },
   {
-    to: '/catalogo',
-    label: 'Catálogo',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
-        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
-      </svg>
-    ),
-  },
-  {
-    to: '/clientes',
-    label: 'Clientes',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-        <circle cx="9" cy="7" r="4"/>
-        <path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
-      </svg>
-    ),
-  },
-  {
     to: '/vendas',
     label: 'Vendas',
+    permission: 'vendas.visualizar',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
@@ -85,6 +70,7 @@ const navItems = [
   {
     to: '/analise-pedidos',
     label: 'Análise de Pedidos',
+    permission: 'analise_pedidos.visualizar',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
@@ -94,6 +80,7 @@ const navItems = [
   {
     to: '/consultas',
     label: 'Consultas',
+    permission: 'consultas.visualizar',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -103,6 +90,7 @@ const navItems = [
   {
     to: '/registros',
     label: 'Registros',
+    permission: 'registros.visualizar',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
@@ -112,12 +100,24 @@ const navItems = [
   {
     to: '/administracao',
     label: 'Administração',
+    permission: 'administracao.visualizar',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
       </svg>
     ),
   },
+];
+
+const registroItems = [
+  { to: '/registros?aba=empresas', label: 'Empresas', permission: 'registros.visualizar' },
+  { to: '/registros?aba=filiais', label: 'Filiais', permission: 'registros.visualizar' },
+  { to: '/clientes', label: 'Clientes', permission: 'clientes.visualizar' },
+  { to: '/registros?aba=fornecedores', label: 'Fornecedores', permission: 'registros.visualizar' },
+  { to: '/catalogo', label: 'Produtos', permission: 'catalogo.visualizar' },
+  { to: '/catalogo', label: 'Categorias', permission: 'catalogo.visualizar' },
+  { to: '/registros?aba=formas-pagamento', label: 'Formas de pagamento', permission: 'registros.visualizar' },
+  { to: '/registros?aba=tabelas-preco', label: 'Tabelas de preço', permission: 'registros.visualizar' },
 ];
 
 const bottomItems = [
@@ -135,10 +135,13 @@ const bottomItems = [
 import orionLogo from '../orion-logo.jpg';
 
 export function Layout() {
-  const { user } = useAuth();
+  const { user, profile, can } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
+  const [isRegistrosExpanded, setIsRegistrosExpanded] = useState(
+    location.pathname === '/registros' || location.pathname === '/clientes' || location.pathname === '/catalogo'
+  );
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const handleLogout = async () => {
@@ -146,9 +149,9 @@ export function Layout() {
     navigate('/');
   };
 
-  const userInitial = user?.email?.charAt(0).toUpperCase() ?? 'A';
+  const userName = profile?.nome?.trim() || user?.user_metadata?.nome || 'Usuário';
+  const userInitial = userName.charAt(0).toUpperCase();
   const userEmail = user?.email ?? 'contato@itzorum.com.br';
-  const userName = user?.email?.split('@')[0] ?? 'admin';
 
   return (
     <div className={`app-layout ${isSidebarExpanded ? 'sidebar-expanded' : ''}`}>
@@ -175,17 +178,90 @@ export function Layout() {
         </div>
 
         <nav className="sidebar-nav">
-          {navItems.map(item => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className={`sidebar-item${location.pathname.startsWith(item.to) ? ' active' : ''}`}
-              title={item.label}
-            >
-              {item.icon}
-              <span className="sidebar-item-label">{item.label}</span>
-            </Link>
-          ))}
+          {navItems.filter(item => can(item.permission)).map(item => {
+            if (item.to !== '/registros') {
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={`sidebar-item${location.pathname.startsWith(item.to) ? ' active' : ''}`}
+                  title={item.label}
+                >
+                  {item.icon}
+                  <span className="sidebar-item-label">{item.label}</span>
+                </Link>
+              );
+            }
+
+            const registrosAtivo = location.pathname === '/registros'
+              || location.pathname === '/clientes'
+              || location.pathname === '/catalogo';
+
+            return (
+              <div key={item.to}>
+                {isSidebarExpanded ? (
+                  <button
+                    type="button"
+                    className={`sidebar-item${registrosAtivo ? ' active' : ''}`}
+                    title={item.label}
+                    onClick={() => setIsRegistrosExpanded(value => !value)}
+                    aria-expanded={isRegistrosExpanded}
+                    style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer' }}
+                  >
+                    {item.icon}
+                    <span className="sidebar-item-label" style={{ flex: 1, textAlign: 'left' }}>{item.label}</span>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      style={{ width: 15, height: 15, transform: isRegistrosExpanded ? 'rotate(180deg)' : undefined }}
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </button>
+                ) : (
+                  <Link
+                    to="/registros"
+                    className={`sidebar-item${registrosAtivo ? ' active' : ''}`}
+                    title={item.label}
+                  >
+                    {item.icon}
+                    <span className="sidebar-item-label">{item.label}</span>
+                  </Link>
+                )}
+
+                {isSidebarExpanded && isRegistrosExpanded && (
+                  <div style={{ display: 'flex', flexDirection: 'column', padding: '3px 0 5px 42px', gap: 2 }}>
+                    {registroItems.filter(registro => can(registro.permission)).map((registro, index) => {
+                      const ativo = registro.to.includes('?')
+                        ? `${location.pathname}${location.search}` === registro.to
+                        : location.pathname === registro.to;
+
+                      return (
+                        <Link
+                          key={`${registro.to}-${index}`}
+                          to={registro.to}
+                          title={registro.label}
+                          style={{
+                            color: ativo ? '#2563eb' : '#64748b',
+                            background: ativo ? '#eff6ff' : 'transparent',
+                            borderRadius: 6,
+                            fontSize: 12,
+                            fontWeight: ativo ? 600 : 500,
+                            padding: '7px 10px',
+                            textDecoration: 'none',
+                          }}
+                        >
+                          {registro.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </nav>
         <div className="sidebar-bottom">
           {bottomItems.map(item => (

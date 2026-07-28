@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '../lib/AuthContext';
 import { listarProdutos, criarProduto, atualizarProduto, deletarProduto, listarCategorias, criarCategoria } from '../lib/db';
 import { listarClientes } from '../lib/db';
 
@@ -18,6 +19,7 @@ const GRUPOS = [
 ];
 
 function Catalogo() {
+  const { can } = useAuth();
   const [produtos, setProdutos] = useState<any[]>([]);
   const [categorias, setCategorias] = useState<any[]>([]);
   const [clientes, setClientes] = useState<any[]>([]);
@@ -220,9 +222,9 @@ function Catalogo() {
               }}>
                 + Nova Categoria
               </button>
-              <button className="btn btn-green btn-sm" onClick={() => { setEditando(null); setForm({ nome: '', descricao: '', preco: '', estoque: '', categoria_id: '', imagem_url: '' }); setModalProdOpen(true); }}>
+              {can('catalogo.criar') && <button className="btn btn-green btn-sm" onClick={() => { setEditando(null); setForm({ nome: '', descricao: '', preco: '', estoque: '', categoria_id: '', imagem_url: '' }); setModalProdOpen(true); }}>
                 + Novo Produto
-              </button>
+              </button>}
             </div>
           </div>
 
@@ -253,8 +255,8 @@ function Catalogo() {
                     </td>
                     <td>
                       <div style={{ display: 'flex', gap: 4 }}>
-                        <button className="btn btn-outline btn-xs" onClick={() => abrirEditar(p)}>✏</button>
-                        <button className="btn btn-xs" style={{ background: '#fdecea', color: 'var(--red)', border: 'none' }} onClick={() => deletar(p.id)}>✕</button>
+                        {can('catalogo.editar') && <button className="btn btn-outline btn-xs" onClick={() => abrirEditar(p)}>✏</button>}
+                        {can('catalogo.excluir') && <button className="btn btn-xs" style={{ background: '#fdecea', color: 'var(--red)', border: 'none' }} onClick={() => deletar(p.id)}>✕</button>}
                       </div>
                     </td>
                   </tr>

@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { listarClientes, criarCliente, atualizarCliente, deletarCliente } from '../lib/db';
 import type { Cliente } from '../lib/types';
+import { useAuth } from '../lib/AuthContext';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -14,6 +15,7 @@ function getStatusBadge(idx: number) {
 }
 
 function Clientes() {
+  const { can } = useAuth();
   const [clientes, setClientes] = useState<Cliente[]>([]);
   const [busca, setBusca] = useState('');
   const [pagina, setPagina] = useState(1);
@@ -100,12 +102,12 @@ function Clientes() {
             </svg>
             Operações no Excel
           </button>
-          <button className="btn btn-green" onClick={abrirNovo}>
+          {can('clientes.criar') && <button className="btn btn-green" onClick={abrirNovo}>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
             </svg>
             Criar novo cliente
-          </button>
+          </button>}
         </div>
       </div>
 
@@ -190,8 +192,8 @@ function Clientes() {
                       </button>
                       {isOpen && (
                         <div className="dropdown-menu">
-                          <button className="dropdown-item" onClick={() => abrirEditar(c)}>Editar</button>
-                          <button className="dropdown-item danger" onClick={() => deletar(c.id)}>Excluir</button>
+                          {can('clientes.editar') && <button className="dropdown-item" onClick={() => abrirEditar(c)}>Editar</button>}
+                          {can('clientes.excluir') && <button className="dropdown-item danger" onClick={() => deletar(c.id)}>Excluir</button>}
                         </div>
                       )}
                     </div>

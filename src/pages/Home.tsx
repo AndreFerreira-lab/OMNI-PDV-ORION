@@ -128,11 +128,11 @@ const quickActions = [
 
 export default function Home() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
 
   const hour = new Date().getHours();
   const greeting = hour < 12 ? 'Bom dia' : hour < 18 ? 'Boa tarde' : 'Boa noite';
-  const userName = user?.email?.split('@')[0] ?? 'Sistema';
+  const userName = profile?.nome?.trim() || user?.user_metadata?.nome || 'Usuário';
 
   return (
     <div className="home-page">

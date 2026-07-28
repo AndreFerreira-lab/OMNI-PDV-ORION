@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './lib/AuthContext';
-import { ProtectedRoute } from './components/ProtectedRoute';
+import { PermissionRoute, ProtectedRoute } from './components/ProtectedRoute';
 import { Layout } from './components/Layout';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -8,8 +8,11 @@ import Catalogo from './pages/Catalogo';
 import Clientes from './pages/Clientes';
 import Vendas from './pages/Vendas';
 import Home from './pages/Home';
-import { Negocios, Atividades, AnalisePedidos, Consultas, Registros, Administracao } from './pages/Placeholders';
+import { Negocios, Atividades, AnalisePedidos, Consultas } from './pages/Placeholders';
 import AnaliseCredito from './pages/AnaliseCredito';
+import Administracao from './pages/Administracao';
+import RedefinirSenha from './pages/RedefinirSenha';
+import Registros from './pages/Registros';
 
 function App() {
   return (
@@ -17,19 +20,20 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/redefinir-senha" element={<RedefinirSenha />} />
           <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/analise-credito" element={<AnaliseCredito />} />
-            <Route path="/negocios" element={<Negocios />} />
-            <Route path="/atividades" element={<Atividades />} />
-            <Route path="/catalogo" element={<Catalogo />} />
-            <Route path="/clientes" element={<Clientes />} />
-            <Route path="/vendas" element={<Vendas />} />
-            <Route path="/analise-pedidos" element={<AnalisePedidos />} />
-            <Route path="/consultas" element={<Consultas />} />
-            <Route path="/registros" element={<Registros />} />
-            <Route path="/administracao" element={<Administracao />} />
+            <Route path="/home" element={<PermissionRoute permission="home.visualizar"><Home /></PermissionRoute>} />
+            <Route path="/dashboard" element={<PermissionRoute permission="dashboard.visualizar"><Dashboard /></PermissionRoute>} />
+            <Route path="/analise-credito" element={<PermissionRoute permission="analise_credito.visualizar"><AnaliseCredito /></PermissionRoute>} />
+            <Route path="/negocios" element={<PermissionRoute permission="negocios.visualizar"><Negocios /></PermissionRoute>} />
+            <Route path="/atividades" element={<PermissionRoute permission="atividades.visualizar"><Atividades /></PermissionRoute>} />
+            <Route path="/catalogo" element={<PermissionRoute permission="catalogo.visualizar"><Catalogo /></PermissionRoute>} />
+            <Route path="/clientes" element={<PermissionRoute permission="clientes.visualizar"><Clientes /></PermissionRoute>} />
+            <Route path="/vendas" element={<PermissionRoute permission="vendas.visualizar"><Vendas /></PermissionRoute>} />
+            <Route path="/analise-pedidos" element={<PermissionRoute permission="analise_pedidos.visualizar"><AnalisePedidos /></PermissionRoute>} />
+            <Route path="/consultas" element={<PermissionRoute permission="consultas.visualizar"><Consultas /></PermissionRoute>} />
+            <Route path="/registros" element={<PermissionRoute permission="registros.visualizar"><Registros /></PermissionRoute>} />
+            <Route path="/administracao" element={<PermissionRoute permission="administracao.visualizar"><Administracao /></PermissionRoute>} />
           </Route>
         </Routes>
       </Router>

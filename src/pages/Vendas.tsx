@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '../lib/AuthContext';
 import { listarProdutos, listarClientes, criarVenda, listarVendas, deletarVenda, atualizarVenda } from '../lib/db';
 import type { Produto, Cliente } from '../lib/types';
 
@@ -12,6 +13,7 @@ interface ItemPedido {
 const today = new Date().toLocaleDateString('pt-BR');
 
 function Vendas() {
+  const { can } = useAuth();
   const [aba, setAba] = useState<'novo' | 'historico'>('historico');
   const [dropdownAbertoId, setDropdownAbertoId] = useState<number | null>(null);
   
@@ -162,9 +164,9 @@ function Vendas() {
               </svg>
               Exportar para o Excel ▾
             </button>
-            <button className="btn btn-yellow" onClick={prepararNovoPedido} style={{ fontWeight: 600 }}>
+            {can('vendas.criar') && <button className="btn btn-yellow" onClick={prepararNovoPedido} style={{ fontWeight: 600 }}>
               + Criar novo pedido
-            </button>
+            </button>}
           </div>
         </div>
 
@@ -233,20 +235,20 @@ function Vendas() {
                         padding: '4px 0',
                         marginTop: 2
                       }}>
-                        <button 
+                        {can('vendas.editar') && <button
                           className="btn"
                           style={{ textAlign: 'left', padding: '6px 12px', fontSize: 11, background: 'none', border: 'none', color: 'var(--text)', width: '100%', borderRadius: 0, justifyContent: 'flex-start' }}
                           onClick={() => abrirFormulario(v, true)}
                         >
                           👁 Visualizar consultando
-                        </button>
-                        <button 
+                        </button>}
+                        {can('vendas.excluir') && <button
                           className="btn"
                           style={{ textAlign: 'left', padding: '6px 12px', fontSize: 11, background: 'none', border: 'none', color: 'var(--text)', width: '100%', borderRadius: 0, justifyContent: 'flex-start' }}
                           onClick={() => abrirFormulario(v, false)}
                         >
                           ✏ Editar a venda
-                        </button>
+                        </button>}
                         <div style={{ height: 1, background: 'var(--border-light)', margin: '2px 0' }}></div>
                         <button 
                           className="btn"

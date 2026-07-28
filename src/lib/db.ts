@@ -1,5 +1,7 @@
 import { supabase } from './supabase';
 import type { Categoria, Produto, Cliente, Venda, ItemVenda } from './types';
+import type { PerfilAcesso, Permissao, UnidadeOrganizacional, UsuarioSistema } from './types';
+import type { Empresa, Filial, FormaPagamento, Fornecedor, TabelaPreco } from './types';
 
 export async function listarCategorias() {
   const { data } = await supabase.from('categorias').select('*').order('nome');
@@ -90,4 +92,173 @@ export async function listarVendas() {
 
 export async function deletarVenda(id: number) {
   return supabase.from('vendas').delete().eq('id', id);
+}
+
+export async function listarPermissoes() {
+  const { data, error } = await supabase
+    .from('permissoes')
+    .select('*')
+    .order('ordem');
+  return { data: (data ?? []) as Permissao[], error };
+}
+
+export async function listarPerfisAcesso() {
+  const { data, error } = await supabase
+    .from('perfis_acesso')
+    .select('*, perfil_permissoes(permissao_id)')
+    .order('nome');
+  return { data: (data ?? []) as PerfilAcesso[], error };
+}
+
+export async function criarPerfilAcesso(payload: Pick<PerfilAcesso, 'nome' | 'descricao'>) {
+  const slug = payload.nome
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_|_$/g, '');
+  return supabase
+    .from('perfis_acesso')
+    .insert({ ...payload, slug, sistema: false, ativo: true })
+    .select()
+    .single();
+}
+
+export async function atualizarPerfilAcesso(
+  id: number,
+  payload: Partial<Pick<PerfilAcesso, 'nome' | 'descricao' | 'ativo'>>
+) {
+  return supabase
+    .from('perfis_acesso')
+    .update({ ...payload, updated_at: new Date().toISOString() })
+    .eq('id', id);
+}
+
+export async function excluirPerfilAcesso(id: number) {
+  return supabase.from('perfis_acesso').delete().eq('id', id).eq('sistema', false);
+}
+
+export async function salvarPermissoesPerfil(perfilId: number, permissaoIds: number[]) {
+  return supabase.rpc('salvar_permissoes_perfil', {
+    target_perfil_id: perfilId,
+    permission_ids: permissaoIds,
+  });
+}
+
+export async function listarUsuariosSistema() {
+  const { data, error } = await supabase
+    .from('usuarios')
+    .select(`
+      *,
+      usuario_perfis(
+        perfil_id,
+        principal,
+        perfis_acesso(*)
+      ),
+      usuario_permissoes(
+        permissao_id,
+        permitido
+      )
+    `)
+    .order('nome');
+  return { data: (data ?? []) as UsuarioSistema[], error };
+}
+
+export async function atualizarUsuarioSistema(
+  id: string,
+  payload: Partial<Pick<UsuarioSistema, 'nome' | 'cargo' | 'ativo'>>
+) {
+  return supabase.from('usuarios').update(payload).eq('id', id);
+}
+
+export async function salvarAcessoUsuario(
+  usuarioId: string,
+  perfilIds: number[],
+  perfilPrincipalId: number,
+  excecoes: { permissao_id: number; permitido: boolean }[]
+) {
+  return supabase.rpc('salvar_acesso_usuario', {
+    target_usuario_id: usuarioId,
+    profile_ids: perfilIds,
+    primary_profile_id: perfilPrincipalId,
+    permission_overrides: excecoes,
+  });
+}
+
+export async function listarUnidadesOrganizacionais() {
+  const { data, error } = await supabase
+    .from('unidades_organizacionais')
+    .select('*')
+    .order('nome');
+  return { data: (data ?? []) as UnidadeOrganizacional[], error };
+}
+
+export async function salvarUnidadeOrganizacional(
+  payload: Pick<UnidadeOrganizacional, 'nome' | 'descricao' | 'parent_id' | 'ativo'>,
+  id?: number
+) {
+  if (id) {
+    return supabase
+      .from('unidades_organizacionais')
+      .update({ ...payload, updated_at: new Date().toISOString() })
+      .eq('id', id);
+  }
+  return supabase.from('unidades_organizacionais').insert(payload).select().single();
+}
+
+export async function excluirUnidadeOrganizacional(id: number) {
+  return supabase.from('unidades_organizacionais').delete().eq('id', id);
+}
+
+export type RegistroTabela = 'empresas' | 'filiais' | 'fornecedores' | 'formas_pagamento' | 'tabelas_preco';
+
+export async function listarEmpresas() {
+  const { data, error } = await supabase.from('empresas').select('*').order('razao_social');
+  return { data: (data ?? []) as Empresa[], error };
+}
+
+export async function listarFiliais() {
+  const { data, error } = await supabase
+    .from('filiais')
+    .select('*, empresas(id, nome_fantasia, razao_social)')
+    .order('nome');
+  return { data: (data ?? []) as Filial[], error };
+}
+
+export async function listarFornecedores() {
+  const { data, error } = await supabase
+    .from('fornecedores')
+    .select('*, empresas(id, nome_fantasia, razao_social), filiais(id, nome)')
+    .order('razao_social');
+  return { data: (data ?? []) as Fornecedor[], error };
+}
+
+export async function listarFormasPagamento() {
+  const { data, error } = await supabase
+    .from('formas_pagamento')
+    .select('*, empresas(id, nome_fantasia, razao_social)')
+    .order('nome');
+  return { data: (data ?? []) as FormaPagamento[], error };
+}
+
+export async function listarTabelasPreco() {
+  const { data, error } = await supabase
+    .from('tabelas_preco')
+    .select('*, empresas(id, nome_fantasia, razao_social), filiais(id, nome)')
+    .order('nome');
+  return { data: (data ?? []) as TabelaPreco[], error };
+}
+
+export async function salvarRegistro(
+  tabela: RegistroTabela,
+  payload: Record<string, string | number | boolean | null>,
+  id?: number
+) {
+  const dados = { ...payload, updated_at: new Date().toISOString() };
+  if (id) return supabase.from(tabela).update(dados).eq('id', id).select().single();
+  return supabase.from(tabela).insert(payload).select().single();
+}
+
+export async function excluirRegistro(tabela: RegistroTabela, id: number) {
+  return supabase.from(tabela).delete().eq('id', id);
 }

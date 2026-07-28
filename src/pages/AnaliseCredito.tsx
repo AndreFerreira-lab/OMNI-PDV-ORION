@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useAuth } from '../lib/AuthContext';
 import { listarClientes, listarVendas } from '../lib/db';
 
 // Gera um score pseudo-aleatório mas determinístico baseado no ID do cliente
@@ -52,6 +53,7 @@ const FILTROS = [
 ];
 
 function AnaliseCredito() {
+  const { can } = useAuth();
   const [clientes, setClientes] = useState<any[]>([]);
   const [vendas, setVendas] = useState<any[]>([]);
   const [busca, setBusca] = useState('');
@@ -364,12 +366,12 @@ function AnaliseCredito() {
             {/* Header */}
             <div style={{ padding: '16px 20px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #f0f0f0' }}>
               <span style={{ fontSize: 14, fontWeight: 700, color: '#333' }}>Nova Análise</span>
-              <button 
+              {can('analise_credito.criar') && <button
                 onClick={() => setModalAnaliseOpen(false)}
                 style={{ background: 'none', border: 'none', fontSize: 16, color: '#999', cursor: 'pointer' }}
               >
                 ✕
-              </button>
+              </button>}
             </div>
 
             {/* Body */}
