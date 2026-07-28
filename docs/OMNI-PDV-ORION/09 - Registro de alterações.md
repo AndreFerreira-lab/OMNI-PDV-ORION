@@ -21,6 +21,8 @@ ultima_revisao: 2026-07-28
 - Validados build com 691 módulos, navegação por abas, leitura, criação, edição e exclusão com usuário administrador.
 - Registro temporário de teste removido após a validação.
 - Gestão de itens das tabelas de preço permanece para a próxima etapa.
+- Branch `codex/admin-permissions` enviada ao GitHub e Preview criado na Vercel.
+- Preview ficou `READY`, sem erros de build ou runtime; produção permaneceu inalterada.
 
 ## 2026-07-28 — Recuperação de senha
 
