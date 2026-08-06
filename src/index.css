@@ -1725,10 +1725,11 @@ select.form-control { appearance: none; background-image: url("data:image/svg+xm
 .caixa-panel-heading input { width: min(320px, 50%); height: 37px; padding: 0 12px; border: 1px solid #d9dfeb; border-radius: 8px; outline: none; font-size: 10px; }
 .caixa-panel-heading input:focus { border-color: #84adff; box-shadow: 0 0 0 3px #eff4ff; }
 .caixa-product-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; max-height: 650px; overflow: auto; padding-right: 3px; }
-.caixa-product { display: grid; grid-template-columns: 38px minmax(0, 1fr) auto 25px; align-items: center; gap: 9px; padding: 10px; border: 1px solid #e5eaf2; border-radius: 9px; background: #fff; text-align: left; cursor: pointer; transition: .16s ease; }
+.caixa-product { display: grid; grid-template-columns: 46px minmax(0, 1fr) auto 25px; align-items: center; gap: 9px; padding: 10px; border: 1px solid #e5eaf2; border-radius: 9px; background: #fff; text-align: left; cursor: pointer; transition: .16s ease; }
 .caixa-product:hover:not(:disabled) { border-color: #84adff; background: #f8faff; transform: translateY(-1px); }
 .caixa-product:disabled { opacity: .55; cursor: not-allowed; }
-.caixa-product-mark { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #155eef, #53b1fd); color: #fff; font-size: 13px; font-weight: 800; }
+.caixa-product-mark { position: relative; display: grid; place-items: center; width: 44px; height: 44px; overflow: hidden; border: 1px solid #e5eaf2; border-radius: 9px; background: linear-gradient(135deg, #155eef, #53b1fd); color: #fff; font-size: 13px; font-weight: 800; }
+.caixa-product-mark img { position: absolute; inset: 0; width: 100%; height: 100%; background: #fff; object-fit: contain; }
 .caixa-product-info, .caixa-product-stock { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .caixa-product-info strong { overflow: hidden; color: #344054; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
 .caixa-product-info small, .caixa-product-stock small { color: #98a2b3; font-size: 8px; }
