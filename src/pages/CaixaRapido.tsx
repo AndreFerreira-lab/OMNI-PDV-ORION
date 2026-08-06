@@ -167,7 +167,17 @@ export default function CaixaRapido() {
                   disabled={produto.estoque <= 0}
                   onClick={() => adicionar(produto)}
                 >
-                  <span className="caixa-product-mark">{produto.nome.charAt(0).toUpperCase()}</span>
+                  <span className="caixa-product-mark" aria-hidden="true">
+                    <span>{produto.nome.charAt(0).toUpperCase()}</span>
+                    {produto.imagem_url && (
+                      <img
+                        src={produto.imagem_url}
+                        alt=""
+                        loading="lazy"
+                        onError={event => { event.currentTarget.style.display = 'none'; }}
+                      />
+                    )}
+                  </span>
                   <span className="caixa-product-info">
                     <strong>{produto.nome}</strong>
                     <small>{produto.categorias?.nome || 'Sem categoria'}</small>
@@ -265,4 +275,3 @@ export default function CaixaRapido() {
     </section>
   );
 }
-

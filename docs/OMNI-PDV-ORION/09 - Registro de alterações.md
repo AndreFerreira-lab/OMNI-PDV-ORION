@@ -8,6 +8,15 @@ ultima_revisao: 2026-07-28
 
 # Registro de alterações
 
+## 2026-08-06 — Imagens dos produtos no Caixa Rápido
+
+- O Caixa Rápido passou a exibir `produtos.imagem_url` nos cartões da consulta.
+- Mantida a inicial do produto como fallback para URL ausente ou imagem indisponível.
+- Adicionadas sete imagens próprias em `public/products` e associadas aos sete produtos existentes.
+- Banco: somente atualização de `imagem_url`; nenhuma tabela, coluna, relação, RLS, estoque ou venda foi alterada.
+- Arquivos afetados: `src/pages/CaixaRapido.tsx`, `src/index.css`, `public/products` e documentação.
+- Validações: build de produção e consulta dos registros atualizados.
+
 ## 2026-07-28 — Publicação em produção
 
 - Versão de Administração, Recuperação de senha, Registros fase 1 e Caixa Rápido aprovada para produção.

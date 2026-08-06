@@ -104,6 +104,7 @@ Exceto `/` e `/redefinir-senha`, todas as rotas estão protegidas por sessão.
 - A quantidade não pode ultrapassar o estoque exibido e produtos sem estoque não podem ser adicionados.
 - A venda é finalizada com status `finalizada` e baixa o estoque pelo mesmo serviço usado em Vendas.
 - O preço unitário salvo nos itens já considera o desconto informado, mantendo a soma dos itens coerente com o total da venda.
+- A lista exibe a imagem cadastrada em `produtos.imagem_url`; quando a imagem estiver ausente ou falhar, mantém a inicial do produto como fallback.
 - Não cria tabelas, relações nem políticas RLS.
 - A arquitetura completa planejada está em [[10 - Caixa rápido - visão futura]].
 
